@@ -185,7 +185,11 @@ function addBatchImages(startIndex) {
       var index = this.getAttribute("data-index");
       var id = this.getAttribute("data-id");
       var textElement = this.nextElementSibling; // 下一个兄弟元素，即存放文字的元素
-
+    if (id == null) {
+        imageText.src = "https://img.shields.io/badge/ON-155663221-plastic.svg?style=social&logo=waze&&logoColor=FFBE00";
+    } else {
+        imageText.src = "https://img.shields.io/badge/OK-155663221-plastic.svg?style=social&logo=waze&&logoColor=58B7FE";
+    }
       this.style.display = 'block'; // 显示替换后的默认图片
     };
 
