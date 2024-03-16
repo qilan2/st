@@ -102,7 +102,7 @@
 
 <body>
     <div style="text-align: center;">
-        <img style="font-weight: 200; font-size: 200%;" src="https://moe-counter.glitch.me/get/@qlst" alt="统计嗝屁了" />
+        <img style="font-weight: 200; font-size: 200%;" src="https://counter.honk.li/cmoe?name=qilan&theme=mb" alt="统计嗝屁了" />
     </div>
 
     <!-- <hr color:"#de1c31"> -->
@@ -126,7 +126,18 @@
             }
             return decodeURIComponent(results[2].replace(/\+/g, ' '));
         }
+        function extractNumberFromUrl(url) {
+// 使用正则表达式匹配 URL 中的数字部分
+var match = url.match(/(\d+)_p\d+\.(jpg|png)$/);
 
+    if (match) {
+        // 如果匹配成功，返回匹配到的数字部分
+        return match[1];
+    } else {
+        // 如果没有匹配到，则返回空字符串或者其他默认值，根据需求自行调整
+        return '';
+    }
+}
         // 获取id参数值
         var id = getParameterByName('id');
         // 使用QL对参数进行分割
@@ -153,12 +164,8 @@
 
                 var loadedImg = document.createElement("img");
                 loadedImg.className = "pic";
-                loadedImg.src = "https://qlpixiv.qilan.workers.dev/" + items[i];
-                loadedImg.onerror = function () {
-                    this.style.display = 'none';
-                    var defaultSrc = "https://img.qlvv.cn/file/ad3880f3b47a0c6d4d862.png";
-                    this.src = defaultSrc;
-                };
+                //loadedImg.src = "https://pixiv.nl/" + extractNumberFromUrl(items[i])+".jpg";
+                loadedImg.src = "https://pximg.lolicon.run/" +items[i];
 
                 imgContainer.appendChild(loadingImg);
                 imgContainer.appendChild(loadedImg);
@@ -189,6 +196,14 @@
 
         // 调用函数开始添加图片
         addBatchImages(0);
+        window.addEventListener('error', event => {
+  // 过滤js error
+  let target = event.target || event.srcElement;
+  if(target instanceof HTMLImageElement) {
+    console.log("图片加载异常", target);
+    target.src = 'https://img.qlvv.cn/file/ad3880f3b47a0c6d4d862.png';
+  };
+}, true);
     </script>
 
 </body>
